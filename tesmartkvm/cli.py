@@ -31,7 +31,7 @@ Examples:
   teskvm get port               Get current active port
   teskvm list                   List configured port names
   teskvm set port 3             Switch to port 3
-  teskvm set port pve-main      Switch to port by name (from config)
+  teskvm set port workstation   Switch to port by name (from config)
   teskvm set buzzer off         Disable buzzer
   teskvm set buzzer on          Enable buzzer
   teskvm set lcd 10             Set LCD timeout to 10 seconds
@@ -163,8 +163,8 @@ def handle_list(config: Config) -> int:
         print(f"Add port names to {config.config_path}")
         print("\nExample:")
         print("[ports]")
-        print("pve-main = 1")
-        print("workstation = 2")
+        print("workstation = 1")
+        print("server = 2")
         return 0
 
     print("Configured port names:")

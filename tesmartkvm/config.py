@@ -97,7 +97,7 @@ class Config:
         workstation = 2
 
         [connections.work]
-        host = "10.1.99.1"
+        host = "192.168.1.20"
         port = 5000
         num_ports = 8
 
