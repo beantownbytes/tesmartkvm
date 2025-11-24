@@ -345,5 +345,4 @@ The library implements the TESmart KVM protocol:
 ## Requirements
 
 - Python 3.7 or higher
-- No external dependencies (uses only Python standard library)
 
