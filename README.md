@@ -22,6 +22,98 @@ Install directly from source:
 pip install -e .
 ```
 
+This will install both the Python library and the `teskvm` CLI tool.
+
+## Command-Line Interface (CLI)
+
+The `teskvm` command provides a convenient way to control your TESmart KVM from the terminal.
+
+### CLI Usage
+
+```bash
+# Get current active port
+teskvm get port
+
+# Set active port by number
+teskvm set port 3
+
+# Set active port by friendly name (requires config with port names)
+teskvm set port desktop
+
+# Control buzzer
+teskvm set buzzer on
+teskvm set buzzer off
+
+# Control LCD timeout
+teskvm set lcd 0      # Disable
+teskvm set lcd 10     # 10 seconds
+teskvm set lcd 30     # 30 seconds
+
+# Control auto input detection
+teskvm set auto on
+teskvm set auto off
+
+# List all port name mappings (requires config with port names)
+teskvm list
+
+# Use a different connection (requires multi-connection config)
+teskvm -c office get port
+teskvm --connection lab set port 5
+```
+
+### CLI Configuration
+
+The CLI uses the same configuration file as the library. To use friendly port names and multiple connections, set up your config file at `~/.config/tesmartkvm/config.toml`:
+
+**Multi-Connection Config Example:**
+
+```toml
+default_connection = "home"
+
+[connections.home]
+host = "192.168.1.10"
+port = 5000
+num_ports = 16
+
+[connections.home.ports]
+workstation = 1
+server = 2
+laptop = 3
+gaming = 4
+
+[connections.office]
+host = "192.168.1.20"
+port = 5000
+num_ports = 8
+
+[connections.office.ports]
+desktop = 1
+laptop = 2
+```
+
+With this configuration, you can use friendly names:
+
+```bash
+# Switch using friendly name
+teskvm set port workstation
+
+# Or use the number directly
+teskvm set port 1
+
+# Use a different connection
+teskvm -c office set port laptop
+```
+
+### CLI Help
+
+For full CLI help, run:
+
+```bash
+teskvm --help
+teskvm get --help
+teskvm set --help
+```
+
 ## Configuration
 
 The library supports loading default settings from a configuration file located at `~/.config/tesmartkvm/config.toml`. This allows you to set your KVM's IP address and other preferences once, instead of passing them every time.
