@@ -113,7 +113,7 @@ kvm.set_auto_detect(True)
 ```python
 from tesmartkvm import TESmartKVM
 
-# Uses config file settings if available, otherwise defaults (10.1.99.1:5000)
+# Uses config file settings if available, otherwise defaults (192.168.1.10:5000)
 kvm = TESmartKVM()
 
 # Or specify custom host and port (overrides config file)
@@ -231,7 +231,7 @@ except InvalidValueError as e:
 
 ```python
 TESmartKVM(
-    host: str = "10.1.99.1",
+    host: str = "192.168.1.10",
     port: int = 5000,
     timeout: float = 5.0,
     delay: float = 1.0,
@@ -240,7 +240,7 @@ TESmartKVM(
 ```
 
 **Parameters:**
-- `host`: IP address of the KVM (default: "10.1.99.1")
+- `host`: IP address of the KVM (default: "192.168.1.10")
 - `port`: TCP port number (default: 5000)
 - `timeout`: Socket timeout in seconds (default: 5.0)
 - `delay`: Delay between commands in seconds for stability (default: 1.0)

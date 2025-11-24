@@ -16,7 +16,7 @@ except ModuleNotFoundError:
 DEFAULT_CONFIG_PATH = Path.home() / ".config" / "tesmartkvm" / "config.toml"
 
 DEFAULT_CONNECTION_CONFIG = {
-    "host": "10.1.99.1",
+    "host": "192.168.1.10",
     "port": 5000,
     "timeout": 5.0,
     "delay": 1.0,

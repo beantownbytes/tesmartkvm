@@ -33,7 +33,7 @@ class TESmartKVM:
     Explicit parameters override configuration file values.
 
     Args:
-        host: IP address of the KVM (default: from config or 10.1.99.1)
+        host: IP address of the KVM (default: from config or 192.168.1.10)
         port: TCP port number (default: from config or 5000)
         timeout: Socket timeout in seconds (default: from config or 5.0)
         delay: Delay between commands in seconds for stability (default: from config or 1.0)
