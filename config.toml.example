@@ -1,0 +1,42 @@
+# TESmart KVM Configuration File
+# Copy this file to ~/.config/tesmartkvm/config.toml and customize as needed
+
+# Default connection to use when --connection/-c is not specified
+default_connection = "home"
+
+# Define your KVM connections
+# Each connection can have its own settings and port names
+
+[connections.home]
+host = "192.168.1.10"
+port = 5000
+timeout = 5.0
+delay = 1.0
+num_ports = 16
+
+[connections.home.ports]
+proxmox = 1
+proxmox-backup = 2
+workstation = 3
+laptop = 4
+server = 5
+
+[connections.work]
+host = "192.168.2.10"
+port = 5000
+timeout = 5.0
+delay = 1.0
+num_ports = 8
+
+[connections.work.ports]
+desktop = 1
+laptop = 2
+build-server = 3
+test-machine = 4
+
+# Usage:
+#   teskvm get port                    # Uses default_connection ("home")
+#   teskvm -c work get port            # Uses "work" connection
+#   teskvm --connection home set port 2 # Uses "home" connection explicitly
+#   teskvm list                        # Lists port names for default connection
+#   teskvm -c work list                # Lists port names for "work" connection
