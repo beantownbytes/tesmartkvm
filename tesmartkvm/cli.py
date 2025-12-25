@@ -175,18 +175,23 @@ def handle_list(config: Config) -> int:
     return 0
 
 
-def handle_get_port(kvm: TESmartKVM) -> int:
+def handle_get_port(kvm: TESmartKVM, config: Config) -> int:
     """Handle the 'get port' command.
 
     Args:
         kvm: TESmartKVM instance
+        config: Config instance for resolving port names
 
     Returns:
         Exit code (0 for success)
     """
     try:
         port = kvm.get_port()
-        print(port)
+        port_name = config.get_port_name(port)
+        if port_name:
+            print(f"{port} ({port_name})")
+        else:
+            print(f"{port} (NO_ALIAS)")
         return 0
     except TESmartError as e:
         print(f"Error: {e}", file=sys.stderr)
@@ -214,7 +219,12 @@ def handle_set_port(kvm: TESmartKVM, port_identifier: str, config: Config) -> in
 
     try:
         result = kvm.set_port(port)
-        port_display = config.get_port_name(result['new_port']) or str(result['new_port'])
+        new_port = result['new_port']
+        port_name = config.get_port_name(new_port)
+        if port_name:
+            port_display = f"{new_port} ({port_name})"
+        else:
+            port_display = f"{new_port} (NO_ALIAS)"
         if result["changed"]:
             print(f"Switched to port {port_display}")
         else:
@@ -345,7 +355,7 @@ def main(argv: Optional[list] = None) -> int:
         return handle_list(config)
     elif args.command == "get":
         if args.property == "port":
-            return handle_get_port(kvm)
+            return handle_get_port(kvm, config)
         else:
             print(f"Error: Cannot get '{args.property}' - not supported by KVM protocol", file=sys.stderr)
             return 1
